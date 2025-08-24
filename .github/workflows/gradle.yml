@@ -28,7 +28,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: printing user name
-      run: echo {{secrets.USER_NAME}}
+      run: echo ${{secrets.USER_NAME}}
 
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
@@ -48,6 +48,17 @@ jobs:
     #
     # - name: Build with Gradle 8.9
     #   run: gradle build
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: starting test job
+        run: echo ${{secrets.USER_NAME}}
+      
 
   dependency-submission:
 
